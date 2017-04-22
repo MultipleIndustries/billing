@@ -1,0 +1,260 @@
+@CHARSET "UTF-8";
+
+input[type="text"],input[type="password"] {
+	width: 138px;
+}
+
+td {
+	padding-right: 10px;
+	font-weight: bold;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+#mainContainer {
+	margin: 0px auto;
+	width: 960px;
+	border: 1px solid #333;
+}
+/* Header CSS starts */
+#header {
+	height: 60px;
+	background-color: #13A2DC;
+}
+
+#header .logo {
+	float: left;
+	width: 200px;
+}
+
+#header .logo h4 {
+	margin: 0px;
+	color: #990000;
+}
+
+#header .banner {
+	float: left;
+	padding: 0px;
+	margin: 0px;
+	width: 600px;
+	color: #660000;
+}
+
+#header .banner img {
+	float: left;
+	height: 90px;
+	width: 100px;
+	margin: 0px;
+}
+
+#header .banner h1 {
+	padding-left: 50px;
+	float: left;
+}
+/* Header CSS ends */
+
+/* Main Content CSS starts */
+#mainContent {
+	height: 1300px;
+}
+
+#heading h3 {
+	text-align: center;
+	color: #003399;
+	margin-top: 5px;
+}
+
+#heading .userdetail {
+	height: 35px;
+}
+
+a.logout {
+	margin-top: 5px;
+	width: 80px;
+	padding: 5px;
+	display: block;
+	background: #13A2DC;;
+	color: white;
+	text-decoration: none;
+	float: right;
+	margin-left: 20px;
+	margin-right: 10px;
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+#content {
+	margin: 0px auto;
+	width: 800px;
+	border: 1px solid #333;
+}
+
+#content .login {
+	margin: 0px auto;
+	width: 80%;
+	padding: 10px;
+	color: #003399;
+}
+
+#content .login table {
+	margin: 0px auto;
+	width: 80%;
+}
+
+#content .options {
+	padding: 50px 100px;
+	margin: 0px;
+}
+
+.oLink {
+	display: block;
+	text-decoration: none;
+	background-color: #13A2DC;
+	padding: 30px;
+	width: 100px;
+	height: 10px;
+	text-align: center;
+	color: white;
+}
+
+.oLink:HOVER {
+	display: block;
+	text-decoration: none;
+	background-color: #13A2DC;
+	padding: 30px;
+	width: 100px;
+	height: 10px;
+	text-align: center;
+	color: white;
+	font-weight: bolder;
+}
+
+#biom {
+	padding: 10px 50px;
+	width: 700px;
+}
+
+#biom table {
+	margin: 0px auto;
+}
+
+#biom img {
+	border: 0px;
+	border: 1px solid #333;
+}
+
+#biom .handdiv {
+	position: relative;
+	background: #ffffff url('../image/Hand.png') no-repeat right top;
+	border: 1px solid #333;
+	margin: 0px auto;
+	width: 600px;
+	height: 332px;
+}
+
+#biom .handdiv  a {
+	display: block;
+	text-decoration: none;
+	width: 20px;
+	height: 20px;
+	font-weight: bold;
+	position: absolute;
+	text-align: center;
+}
+
+a.genOtp {
+	display: block;
+	text-decoration: none;
+	width: 160px;
+	height: 44px;
+	background-color: #13A2DC;
+	margin-top: 10px;
+}
+
+a.genOtp img {
+	float: left;
+}
+
+a.genOtp label {
+	float: left;
+	padding-top: 10px;
+	padding-left: 5px;
+	color: white;
+}
+
+a.save {
+	margin-top: 10px;
+	width: 80px;
+	padding: 5px;
+	display: block;
+	background: #13A2DC;;
+	color: white;
+	text-decoration: none;
+	margin-bottom: 10px;
+	float: left;
+	margin-left: 20px;
+	text-align: center;
+}
+
+a.print {
+	margin-top: 10px;
+	width: 80px;
+	padding: 5px;
+	display: block;
+	background: #13A2DC;;
+	color: white;
+	text-decoration: none;
+	margin-bottom: 10px;
+	float: left;
+	margin-left: 20px;
+	text-align: center;
+}
+
+a.back {
+	margin-top: 10px;
+	width: 80px;
+	padding: 5px;
+	display: block;
+	background: #13A2DC;;
+	color: white;
+	text-decoration: none;
+	margin-bottom: 10px;
+	float: left;
+	margin-left: 20px;
+	text-align: center;
+}
+
+a.loginagain {
+	margin-top: 10px;
+	width: 150px;
+	padding: 5px;
+	display: block;
+	background: #13A2DC;;
+	color: white;
+	text-decoration: none;
+	margin-bottom: 10px;
+	float: left;
+	margin-left: 20px;
+	text-align: center;
+}
+
+a:hover {
+	font-weight: bold;
+}
+
+/* Main Content CSS ends */
+
+/* Footer CSS starts */
+#footer {
+	background-color: #13A2DC;
+	border: 1px solid #333;
+}
+
+#footer h5 {
+	text-align: center;
+	color: #fff;
+}
+/* Footer CSS ends */

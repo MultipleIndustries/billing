@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.multiple</groupId>
+  <artifactId>billing</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>billing</name>
+  <description>Parent project</description>
+  <modules>
+  	<module>common</module>
+    <module>root</module>
+  </modules>
+  
+<!--   ***********************Set property values***********************  -->
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!-- 		<spring.version>4.0.0.RELEASE</spring.version> -->
+<!-- 		<java.version>1.7</java.version> -->
+<!-- 		<junit.version>4.8.2</junit.version> -->
+<!-- 		<slf4j.version>1.7.5</slf4j.version> -->
+		<spring.version>4.2.4.RELEASE</spring.version>
+		<springSecurity.version>4.0.3.RELEASE</springSecurity.version>
+		<java.version>1.7</java.version>
+		<slf4j.version>1.7.13</slf4j.version>
+  </properties>
+  
+  
+<!--   ***********************Adding dependency*********************** -->
+  <dependencyManagement>
+    <dependencies>
+    
+<!--    ################################################################################ 	-->
+<!--    Junit dependency used for Unit testing -->
+
+
+
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.8.2</version>
+	</dependency>
+ 
+ 
+ 
+<!--    ################################################################################ 	-->    	
+<!--     SLF4J used for logging purpose -->
+
+	    <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+	    </dependency>
+	    
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+<!-- 	Log4j for Logging purpose -->
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		
+
+
+<!--    ################################################################################ 	-->	   
+<!--   Core Spring Container start-->
+
+<!--
+    	Bean Factory and JavaBeans utilities (depends on spring-core)
+    	Define this if you use Spring Bean APIs (org.springframework.beans.*)
+-->
+	   <dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>spring-beans</artifactId>
+           <version>${spring.version}</version>
+       </dependency>
+       
+<!--   
+		Core utilities used by other modules.
+        Define this if you use Spring Utility APIs 
+        (org.springframework.core.*/org.springframework.util.*)
+-->
+       <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+       </dependency>
+       
+<!--   Core and beans provide the funcamental parts(Bean Factory) of framework,  -->
+<!--   including IOC and Dependency injection -->
+        
+<!--
+    	Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)
+    	This is the central artifact for Spring's Dependency Injection Container and is generally 
+     	always defined
+-->
+       <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+       </dependency>
+       
+<!--    Context is build on the solid base of core and beans -->
+ 
+<!--
+    	Expression Language (depends on spring-core)
+    	Define this if you use Spring Expression APIs (org.springframework.expression.*)
+-->
+		<dependency>
+ 			<groupId>org.springframework</groupId>
+  			<artifactId>spring-expression</artifactId>
+ 			<version>${spring.version}</version>
+		</dependency>
+ 
+<!-- 	Classes supporting the org.springframework.context package, such 
+		as abstract base classes for ApplicationContext implementations 
+		and a MessageSource implementation. -->
+		
+		<dependency>
+	   		<groupId>org.springframework</groupId>
+	   		<artifactId>spring-context-support</artifactId>
+	   		<version>${spring.version}</version>
+		</dependency>
+ 
+ 
+       
+<!--    Core Spring Container end-->      
+
+<!--    ################################################################################ 	-->      
+<!-- 	The Spring Framework provides first-class support for integration testing in the spring-test module. -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+ 
+<!--    ################################################################################ 	-->      
+<!--    Web and Remoting Start  -->
+
+
+<!--
+    	Web application development utilities applicable to both Servlet and Portlet Environments
+    	(depends on spring-core, spring-beans, spring-context)
+    	Define this if you use Spring MVC, or wish to use Struts, JSF, or another web framework 
+      	with Spring (org.springframework.web.*)
+-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+<!--
+    	Spring MVC for Servlet Environments (depends on spring-core, spring-beans, spring-context, 
+      	spring-web)
+    	Define this if you use Spring MVC with a Servlet Container such as Apache Tomcat 
+      	(org.springframework.web.servlet.*)
+-->
+        <dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-webmvc</artifactId>
+    		<version>${spring.version}</version>
+    	</dependency>
+    	
+    	
+    	
+    	
+    	
+<!--    Web and Remoting End -->
+
+
+<!--    ################################################################################ 	-->    	
+<!--     AOP Start -->
+
+<!--
+    	Aspect Oriented Programming (AOP) Framework (depends on spring-core, spring-beans)
+    	Define this if you use Spring AOP APIs (org.springframework.aop.*)
+-->
+    	<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-aop</artifactId>
+    		<version>${spring.version}</version>
+    	</dependency>
+    
+    	<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-aspects</artifactId>
+    		<version>${spring.version}</version>
+    	</dependency>
+    	
+<!-- 	AOP End -->
+
+
+<!--    ################################################################################ 	-->   
+<!-- Data Access Layer start    -->
+
+<!-- 	Spring Data JPA aims to significantly improve the 
+		implementation of data access layers by reducing the effort
+ 		to the amount that's actually needed. As a developer you
+  		write your repository interfaces, including custom finder
+   		methods, and Spring will provide the implementation automatically. -->
+	   
+	    <dependency>
+	    	<groupId>org.springframework.data</groupId>
+	    	<artifactId>spring-data-jpa</artifactId>
+	    	<version>1.9.2.RELEASE</version>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	    
+	    
+<!-- 	 The EntityManager API is used to access a 
+		 database in a particular unit of work. It is used 
+		 to create and remove persistent entity instances, 
+		 to find entities by their primary key identity, and 
+		 to query over all entities. This interface is similar 
+		 to the Session in Hibernate. -->
+<!-- 	 hibernate-entitymanager is only required if you want to 
+		 use Hibernate Search in conjunction with JPA. -->
+	    <dependency>
+	    	<groupId>org.hibernate</groupId>
+	    	<artifactId>hibernate-entitymanager</artifactId>
+	    	<version>5.0.6.Final</version>
+	    </dependency>
+	    
+<!-- 	 Hibernate Validator allows to express and validate
+		 application constraints (ex. @NotNull, @Min(2), @Size(min=2 , max=5)). The default metadata source 
+		 are annotations, with the ability to override and extend 
+		 through the use of XML. It is not tied to a specific 
+		 application tier or programming model and is available 
+		 for both server and client application programming. -->
+	    
+	    <dependency>
+	    	<groupId>org.hibernate</groupId>
+	    	<artifactId>hibernate-validator</artifactId>
+	    	<version>5.2.2.Final</version>
+	    </dependency>
+	    
+<!-- 	Hibernate ORM(core) enables developers to more easily write 
+		applications whose data outlives the application process. 
+		As an Object/Relational Mapping (ORM) framework, Hibernate 
+		is concerned with data persistence as it applies to relational 
+		databases (via JDBC).  -->
+		
+	    <dependency>
+	    	<groupId>org.hibernate</groupId>
+	    	<artifactId>hibernate-core</artifactId>
+	    	<version>5.0.6.Final</version>
+	    </dependency>
+	    
+<!--	Hibernate Search is a project that complements Hibernate Core 
+		by providing the ability to do full-text search queries on 
+		persistent domain models.  -->
+		
+	    <dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search</artifactId>
+			<version>5.5.2.Final</version>
+		</dependency>
+		
+<!-- 	The Envers module aims to enable easy auditing/versioning
+		of persistent classes. All that you have to do is annotate
+		your persistent class or some of its properties, that you 
+		want to audit, with @Audited. For each audited entity, a 
+		table will be created, which will hold the history of changes 
+		made to the entity. You can then retrieve and query historical 
+		data without much effort. -->
+		
+		 <dependency>
+	    	<groupId>org.hibernate</groupId>
+	    	<artifactId>hibernate-envers</artifactId>
+	    	<version>5.0.6.Final</version>
+	    </dependency>
+	    
+	    <dependency>
+	    	<groupId>mysql</groupId>
+	    	<artifactId>mysql-connector-java</artifactId>
+	    	<version>5.1.38</version>
+	    </dependency>
+	    
+<!-- 	HSQLDB (HyperSQL DataBase) is the leading SQL relational database software
+		written in Java. It offers a small, fast multithreaded and transactional 
+		database engine with in-memory and disk-based tables and supports embedded 
+		and server modes. It includes a powerful command line SQL tool and simple GUI query tools. -->
+	    
+<!-- 	    <dependency> -->
+<!-- 			<groupId>org.hsqldb</groupId> -->
+<!-- 			<artifactId>hsqldb</artifactId> -->
+<!-- 			<version>2.3.3</version> -->
+<!-- 		</dependency> -->
+
+
+<!-- 	Many Apache projects support interaction with a relational database. 
+		Creating a new connection for each user can be time consuming (often 
+		requiring multiple seconds of clock time), in order to perform a database 
+		transaction that might take milliseconds. Opening a connection per user can 
+		be unfeasible in a publicly-hosted Internet application where the number of 
+		simultaneous users can be very large. Accordingly, developers often wish to 
+		share a "pool" of open connections between all of the application's current users. 
+		The number of users actually performing a request at any given time is usually a 
+		very small percentage of the total number of active users, and during request processing 
+		is the only time that a database connection is required. The application itself logs 
+		into the DBMS, and handles any user account issues internally. -->
+
+<!-- 	There are several Database Connection Pools already available, both within Apache products
+		and elsewhere. This Commons package provides an opportunity to coordinate the efforts 
+		required to create and maintain an efficient, feature-rich package under the ASF license. -->
+
+<!-- 	The commons-dbcp2 package relies on code in the commons-pool2 package to provide the underlying
+		object pool mechanisms that it utilizes.		 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		
+<!-- 	Create a simple thread pool to handle concurrent requests -->
+		
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.6</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	    
+	    
+	    
+	    
+	    
+<!-- 	Data Access Layer end    -->  
+
+
+<!--    ################################################################################ 	--> 
+<!-- 	Date and Time in Joda format start  -->
+<!--    Joda-Time provides a quality replacement for the Java date 
+		and time classes. Joda-Time is the de facto standard date 
+		and time library for Java. -->
+   
+	    <dependency>
+	    	<groupId>joda-time</groupId>
+	    	<artifactId>joda-time</artifactId>
+	    	<version>2.9.1</version>
+	    </dependency>
+	    
+<!-- 	Usertype can persist both JSR 310 and Joda Time based dates 
+		and times to a database using Hibernate. -->
+		
+	    <dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+			<version>5.0.0.GA</version>
+		</dependency> 
+		
+		
+		
+		
+		
+<!-- 	Date and Time in Joda format end  -->    
+    
+    
+	    
+	    
+<!--    ################################################################################ 	-->	    
+<!-- 	Advance java start -->
+	    
+<!-- 	The javax.servlet package contains a number of classes 
+		and interfaces that describe and define the contracts between 
+		a servlet class and the runtime environment provided for an 
+		instance of such a class by a conforming servlet container. 	-->
+	    
+	    <dependency>
+	    	<groupId>javax.servlet</groupId>
+	    	<artifactId>javax.servlet-api</artifactId>
+	    	<version>3.1.0</version>
+	    </dependency>
+	    
+<!-- 	The JavaServer Pages Standard Tag Library (JSTL) is a 
+		collection of useful JSP tags which encapsulates core functionality 
+		common to many JSP applications. JSTL has support for common, 
+		structural tasks such as iteration and conditionals, tags for 
+		manipulating XML documents, internationalization tags, and SQL tags. 
+		It also provides a framework for integrating existing custom tags with JSTL tags. -->
+	    
+	    <dependency>
+	    	<groupId>jstl</groupId>
+	    	<artifactId>jstl</artifactId>
+	    	<version>1.2</version>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+<!-- 		With the JavaBeans Activation Framework standard extension, developers who use 
+			Java technology can take advantage of standard services to determine the type of 
+			an arbitrary piece of data, encapsulate access to it, discover the operations 
+			available on it, and to instantiate the appropriate bean to perform said operation(s).  -->
+			
+			<dependency>
+				<groupId>javax.activation</groupId>
+				<artifactId>activation</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			
+			    
+<!--    	used for creating custom constraint annotations for 
+			validation on entity fields like @NotNull -->
+	    
+		    <dependency>
+		    	<groupId>javax.validation</groupId>
+		    	<artifactId>validation-api</artifactId>
+		    	<version>1.1.0.Final</version>
+		    </dependency>
+		    
+		    		
+<!-- 		Apache Commons Codec (TM) software provides implementations of 
+			common encoders and decoders such as Base64, Hex, Phonetic and URLs. -->
+		
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.10</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>javax.transaction</groupId>
+				<artifactId>jta</artifactId>
+				<version>1.1</version>
+			</dependency>
+			
+	    <dependency>
+	<groupId>org.glassfish.jersey.core</groupId>
+	<artifactId>jersey-server</artifactId>
+	<version>2.22</version>
+</dependency>
+	    
+	    
+	    
+<!-- 	Advance java end -->  
+
+
+<!--    ################################################################################ 	-->   
+<!-- 	Advance section in core java by apache start -->
+		
+<!-- 	Apache Commons Collections is a project to develop and maintain collection
+		classes based on and inspired by the JDK collection framework. -->
+		
+		<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2.2</version>
+		</dependency>
+		
+<!-- 	The standard Java libraries fail to provide enough methods for manipulation
+		of its core classes. Apache Commons Lang provides these extra methods. -->
+		
+		<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+		</dependency>
+		
+<!-- 	Commons IO is a library of utilities to assist with developing IO functionality. -->
+		    
+		<dependency>
+		        <groupId>commons-io</groupId>
+		        <artifactId>commons-io</artifactId>
+		        <version>2.4</version>
+		</dependency>
+		    
+<!-- 	The Commons FileUpload package makes it easy to add robust, high-performance, file upload capability to your servlets and web applications. -->
+		    
+		<dependency>
+		    	<groupId>commons-fileupload</groupId>
+		    	<artifactId>commons-fileupload</artifactId>
+		    	<version>1.3.1</version>
+		</dependency>
+		    
+		
+<!-- 	Commons IO is a library of utilities to assist with developing IO functionality. -->
+		
+		<dependency>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		
+		
+		
+<!-- 	Advance section in core java by apache end -->	
+
+
+<!--    ################################################################################ 	-->	
+<!-- 	Include captcha -->
+
+		<!-- <dependency>
+			<groupId>nl.captcha</groupId>
+			<artifactId>simpleCaptcha</artifactId>
+			<version>1.2.1</version>
+		</dependency> -->
+		
+
+
+
+
+<!--    ################################################################################ 	-->	
+<!-- 	The JavaMail API provides a platform-independent and protocol-independent framework 
+		to build mail and messaging applications -->
+		
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+	
+<!--    ################################################################################ 	-->	
+<!-- 	Spring Security start	 -->
+<!-- 	For complete details visit ===> http://docs.spring.io/spring-security/site/docs/4.0.4.CI-SNAPSHOT/reference/htmlsingle/ -->
+
+<!-- 	Contains core authentication and access-contol classes and interfaces,
+		remoting support and basic provisioning APIs. Required by any application 
+		which uses Spring Security. Supports standalone applications, remote clients,
+		method (service layer) security and JDBC user provisioning. Contains
+		the top-level packages: 
+		
+		org.springframework.security.core
+		org.springframework.security.access
+		org.springframework.security.authentication
+		org.springframework.security.provisioning	-->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${springSecurity.version}</version>
+		</dependency>
+		
+<!-- 	Contains the security namespace parsing code. You need 
+		it if you are using the Spring Security XML namespace for 
+		configuration. The main package is org.springframework.security.config. 
+		None of the classes are intended for direct use in an application. -->
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${springSecurity.version}</version>
+		</dependency>
+		
+<!-- 	Contains filters and related web-security infrastructure code. Anything 
+		with a servlet API dependency. You’ll need it if you require Spring Security 
+		web authentication services and URL-based access-control. The main package is 
+		org.springframework.security.web. -->
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${springSecurity.version}</version>
+		</dependency>
+		
+		
+<!-- 	Spring Security has its own taglib which provides basic support 
+		for accessing security information and applying security constraints in JSPs. -->
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${springSecurity.version}</version>
+		</dependency>
+		
+<!-- 		This will ensure that all the transitive dependencies of Spring Security use the Spring 4.2.2.RELEASE modules. -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-framework-bom</artifactId> -->
+<!-- 			<version>4.2.2.RELEASE</version> -->
+<!-- 			<type>pom</type> -->
+<!-- 			<scope>import</scope> -->
+<!-- 		</dependency> -->
+		
+		
+		
+				
+<!-- 	Spring Security end	 -->		
+		
+<!--    ################################################################################ 	-->		
+<!-- 	Caching start -->
+
+<!-- 	Ehcache is an open source, standards-based cache that boosts
+		performance, offloads your database, and simplifies scalability.
+		It's the most widely-used Java-based cache because it's robust, 
+		proven, full-featured, and integrates with other popular libraries 
+		and frameworks. Ehcache scales from in-process caching, all the way 
+		to mixed in-process/out-of-process deployments with terabyte-sized caches. -->
+		
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.11</version>
+		</dependency>
+		
+		<dependency>
+	   		<groupId>com.googlecode.ehcache-spring-annotations</groupId>
+			<artifactId>ehcache-spring-annotations</artifactId>
+	   		<version>1.2.0</version>
+		</dependency>
+		
+		
+		
+		
+<!-- 	Caching end -->		
+
+
+		
+				
+<!--    ################################################################################ 	-->		
+<!-- 		Velocity is a Java-based template engine. It permits web page designers 
+			to reference methods defined in Java code. -->
+			
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>1.7</version>
+			</dependency>
+
+
+<!--    ################################################################################ 	-->			
+<!-- 		Used to convert Java object to / from JSON  -->
+
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>1.9.13</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>2.6.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>2.6.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>2.6.4</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>javax.ws.rs-api</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			
+			
+			
+<!--    ################################################################################ 	-->
+<!-- 		Opencsv is a very simple csv (comma-separated values) parser library for Java. -->
+		    
+		    <dependency>
+				<groupId>net.sf.opencsv</groupId>
+				<artifactId>opencsv</artifactId>
+				<version>2.3</version>
+			</dependency>
+
+<!--    ################################################################################ 	-->			
+<!-- 	    Gson is a Java library that can be used to convert Java Objects 
+			into their JSON representation. It can also be used to convert a JSON 
+			string to an equivalent Java object. -->
+			
+	    	<dependency>
+		       <groupId>com.google.code.gson</groupId>
+		       <artifactId>gson</artifactId>
+	       	   <version>2.5</version>
+			</dependency>
+
+<!--    ################################################################################ 	-->			
+<!-- 		imgscalr is a simple and efficient image scaling library implemented 
+			purely in java and provides a handful of operations for image manipulation.  -->
+			
+			<dependency>
+				<groupId>org.imgscalr</groupId>
+				<artifactId>imgscalr-lib</artifactId>
+				<version>4.2</version>
+			</dependency>
+
+<!--    ################################################################################ 	-->			
+<!-- 		The Hyper-Text Transfer Protocol (HTTP) is perhaps the most significant protocol 
+			used on the Internet today. Web services, network-enabled appliances and the growth 
+			of network computing continue to expand the role of the HTTP protocol beyond user-driven 
+			web browsers, while increasing the number of applications that require HTTP support. 
+			Designed for extension while providing robust support for the base HTTP protocol, the 
+			HttpComponents may be of interest to anyone building HTTP-aware client and server applications 
+			such as web browsers, web spiders, HTTP proxies, web service transport libraries, or systems that 
+			leverage or extend the HTTP protocol for distributed communication. -->
+			
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.5.1</version>
+			</dependency>
+			
+			
+<!--    ################################################################################ 	-->			
+<!-- 		Quartz is a richly featured, open source job scheduling library that can be 
+			integrated within virtually any Java application - from the smallest stand-alone 
+			application to the largest e-commerce system. Quartz can be used to create simple or 
+			complex schedules for executing tens, hundreds, or even tens-of-thousands of jobs; 
+			jobs whose tasks are defined as standard Java components that may execute virtually 
+			anything you may program them to do. --> 
+			
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+	
+
+			
+<!--    ################################################################################ 	-->			
+<!-- 		Google Api start -->
+			
+			<dependency>
+				<groupId>com.google.gdata</groupId>
+				<artifactId>core</artifactId>
+				<version>1.47.1</version>
+			</dependency>
+			
+			<dependency>
+			  <groupId>com.google.api-client</groupId>
+			  <artifactId>google-api-client</artifactId>
+			  <version>1.21.0</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.ganyo</groupId>
+				<artifactId>gcm-server</artifactId>
+				<version>1.0.2</version>
+			</dependency>
+
+
+	<dependency>
+		<groupId>com.sun.jersey</groupId>
+		<artifactId>jersey-client</artifactId>
+		<version>1.9.1</version>
+	</dependency>
+<!-- 		Google Api end -->
+
+<!-- 			<dependency> -->
+<!-- 				<groupId>spring</groupId> -->
+<!-- 				<artifactId>spring-context</artifactId> -->
+<!-- 				<version>1.0.2</version> -->
+<!-- 			</dependency> -->
+				
+    </dependencies>
+  </dependencyManagement>
+  
+<!--   ***********************Adding Repositories*********************** --> 
+<repositories>
+		<repository>
+			<id>spring-libs-snapshot</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<updatePolicy>never</updatePolicy>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		
+</repositories>
+
+<!--   ***********************Build Details*********************** -->
+<build>
+		<finalName>billing</finalName>
+		<plugins>
+
+			<!-- Facilitates downloading source and javadoc in Eclipse -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+				 	
+					<wtpversion>2.0</wtpversion>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+
+			<!-- Ensures we are compiling at 1.8_45 level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		<plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.0</version>
+        </plugin>
+		
+
+		</plugins>
+</build>
+ 
+</project>

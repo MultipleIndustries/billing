@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.multiple</groupId>
+		<artifactId>billing</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<!-- <groupId>com.astrika</groupId> -->
+	<artifactId>root</artifactId>
+	<packaging>war</packaging>
+	<!-- <version>0.0.1-SNAPSHOT</version> -->
+	<name>root</name>
+
+	
+	<dependencies>
+	   <!--  <dependency>
+			 <groupId>sun.security</groupId>
+			 <artifactId>sunpkcs11</artifactId>
+			 <scope>system</scope>
+			 <version>1.0</version>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/sunpkcs11.jar</systemPath>
+		</dependency>
+		    <dependency>
+			 <groupId>ibmpkcs11impl</groupId>
+			 <artifactId>ibmpkcs11impl</artifactId>
+			 <scope>system</scope>
+			 <version>1.0</version>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ibmpkcs11impl.jar</systemPath>
+		</dependency> -->
+		<dependency>
+		    <groupId>org.apache.santuario</groupId>
+		    <artifactId>xmlsec</artifactId>
+		    <version>1.5.1</version>
+		</dependency>
+		    
+		    
+		<dependency>
+			<groupId>com.multiple</groupId>
+			<artifactId>common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>bouncycastle</groupId>
+			<artifactId>bcprov-jdk16</artifactId>
+			<version>140</version>
+		</dependency>
+		<dependency>
+			<groupId>bouncycastle</groupId>
+			<artifactId>bcmail-jdk16</artifactId>
+			<version>140</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		 <dependency>
+	    	<groupId>jstl</groupId>
+	    	<artifactId>jstl</artifactId>
+	    </dependency>
+	    
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-client -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-core</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+	
+		<!-- ################################################################################ -->
+		<!-- Advance section in core java by apache start -->
+
+		<!-- Apache Commons Collections is a project to develop and maintain collection 
+			classes based on and inspired by the JDK collection framework. -->
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+		<!-- The standard Java libraries fail to provide enough methods for manipulation 
+			of its core classes. Apache Commons Lang provides these extra methods. -->
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<!-- Commons IO is a library of utilities to assist with developing IO 
+			functionality. -->
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<!-- The Commons FileUpload package makes it easy to add robust, high-performance, 
+			file upload capability to your servlets and web applications. -->
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
+
+		<!-- Commons IO is a library of utilities to assist with developing IO 
+			functionality. -->
+
+		<dependency>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.io</artifactId>
+		</dependency>
+
+
+
+		<!-- ################################################################################ -->
+		<!-- Core Spring Container start -->
+
+		<!-- Bean Factory and JavaBeans utilities (depends on spring-core) Define 
+			this if you use Spring Bean APIs (org.springframework.beans.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+
+		<!-- Core utilities used by other modules. Define this if you use Spring 
+			Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<!-- Core and beans provide the funcamental parts(Bean Factory) of framework, -->
+		<!-- including IOC and Dependency injection -->
+
+		<!-- Application Context (depends on spring-core, spring-expression, spring-aop, 
+			spring-beans) This is the central artifact for Spring's Dependency Injection 
+			Container and is generally always defined -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<!-- Context is build on the solid base of core and beans -->
+
+		<!-- Expression Language (depends on spring-core) Define this if you use 
+			Spring Expression APIs (org.springframework.expression.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+
+		<!-- Classes supporting the org.springframework.context package, such as 
+			abstract base classes for ApplicationContext implementations and a MessageSource 
+			implementation. -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+
+
+		<!-- Core Spring Container end -->
+
+		<!-- ################################################################################ -->
+		<!-- The Spring Framework provides first-class support for integration 
+			testing in the spring-test module. -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+		<!-- ################################################################################ -->
+		<!-- Web and Remoting Start -->
+
+
+		<!-- Web application development utilities applicable to both Servlet and 
+			Portlet Environments (depends on spring-core, spring-beans, spring-context) 
+			Define this if you use Spring MVC, or wish to use Struts, JSF, or another 
+			web framework with Spring (org.springframework.web.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<!-- Spring MVC for Servlet Environments (depends on spring-core, spring-beans, 
+			spring-context, spring-web) Define this if you use Spring MVC with a Servlet 
+			Container such as Apache Tomcat (org.springframework.web.servlet.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+
+
+
+
+		<!-- Web and Remoting End -->
+
+
+		<!-- ################################################################################ -->
+		<!-- AOP Start -->
+
+		<!-- Aspect Oriented Programming (AOP) Framework (depends on spring-core, 
+			spring-beans) Define this if you use Spring AOP APIs (org.springframework.aop.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+
+		 <dependency>
+	    	<groupId>org.springframework.data</groupId>
+	    	<artifactId>spring-data-jpa</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+
+		<!-- AOP End -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+
+		<!-- Contains the security namespace parsing code. You need it if you are 
+			using the Spring Security XML namespace for configuration. The main package 
+			is org.springframework.security.config. None of the classes are intended 
+			for direct use in an application. -->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+
+		<!-- Contains filters and related web-security infrastructure code. Anything 
+			with a servlet API dependency. You’ll need it if you require Spring Security 
+			web authentication services and URL-based access-control. The main package 
+			is org.springframework.security.web. -->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+
+
+		<!-- Spring Security has its own taglib which provides basic support for 
+			accessing security information and applying security constraints in JSPs. -->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+
+		<!-- ################################################################################ -->
+
+<!--    ################################################################################ 	-->			
+<!-- 	    Gson is a Java library that can be used to convert Java Objects 
+			into their JSON representation. It can also be used to convert a JSON 
+			string to an equivalent Java object. -->
+			
+	    	<dependency>
+		       <groupId>com.google.code.gson</groupId>
+		       <artifactId>gson</artifactId>
+			</dependency>
+			
+	</dependencies>
+
+
+	<!-- ***********************Set property values*********************** -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- <spring.version>4.0.0.RELEASE</spring.version> -->
+		<!-- <java.version>1.7</java.version> -->
+		<!-- <junit.version>4.8.2</junit.version> -->
+		<!-- <slf4j.version>1.7.5</slf4j.version> -->
+		<spring.version>4.2.4.RELEASE</spring.version>
+		<java.version>1.7</java.version>
+		<junit.version>4.12</junit.version>
+		<slf4j.version>1.7.13</slf4j.version>
+	</properties>
+
+
+	<repositories>
+		<!-- JBoss Repository used for Java EE 6 pieces -->
+		<repository>
+			<id>repository.jboss.org</id>
+			<name>JBoss Repository</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<build>
+		<finalName>billing</finalName>
+		<plugins>
+
+			<!-- Facilitates downloading source and javadoc in Eclipse -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+
+			<!-- Plugin to run and test through maven -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.25</version>
+				<configuration>
+					<scanIntervalSeconds>3</scanIntervalSeconds>
+				</configuration>
+			</plugin>
+
+			<!-- Ensures we are compiling at 1.8_45 level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<!-- Tomcat plugin for embedded tomcat -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<path>/${project.build.finalName}</path>
+
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd	
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/aop
+   		http://www.springframework.org/schema/aop/spring-aop.xsd
+   		http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="byName">
+
+	<!-- Scans within the base package of the application for @Components to configure as beans -->
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:db.properties" />
+	</bean>
+	
+	<!-- 	<import resource="app/cacheConfig.xml" /> -->
+	
+	
+		<jpa:repositories base-package="com.multiple.*.repository" />
+	
+<!-- 	In case you use either @CreatedBy or @LastModifiedBy, the auditing infrastructure somehow needs 
+		to become aware of the current principal. To do so, we provide an AuditorAware<T> SPI interface 
+		that you have to implement to tell the infrastructure who the current user or system interacting 
+		with the application is. The generic type T defines of what type the properties annotated with 
+		@CreatedBy or @LastModifiedBy have to be. -->
+		
+		<jpa:auditing auditor-aware-ref="auditorAwareBean"/>
+	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="packagesToScan" value="com.multiple.*.model" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="false" />
+				<property name="generateDdl" value="false" />
+				<property name="databasePlatform" value="${db.dialect}" />
+			</bean>
+		</property>	
+		<property name="jpaPropertyMap">
+		    <props>
+		        <prop key="hibernate.hbm2ddl.auto">update</prop>
+<!--        			<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>  -->
+<!--        			<prop key="hibernate.cache.provider_class">org.hibernate.cache.SingletonEhCacheProvider</prop> -->
+<!--        			<prop key="hibernate.cache.provider_configuration">/WEB-INF/spring/app/ehcache.xml</prop> -->
+<!--            		<prop key="hibernate.cache.use_second_level_cache">true</prop> -->
+<!--            		<prop key="hibernate.cache.use_structured_entries">true</prop> -->
+<!--            		<prop key="hibernate.cache.use_query_cache">true</prop> -->
+<!--            		<prop key="javax.persistence.sharedCache.mode">ENABLE_SELECTIVE</prop> -->
+<!-- 				<prop key="hibernate.search.default.indexBase">C:\lucene_index\loanapp</prop> -->
+<!-- 				<prop key="hibernate.search.default.directory_provider">filesystem</prop> -->
+           		<prop key="jadira.usertype.autoRegisterUserTypes">true</prop>
+           		<prop key="hibernate.connection.CharSet">utf8</prop>
+			    <prop key="hibernate.connection.characterEncoding">utf8</prop>
+			    <prop key="hibernate.connection.useUnicode">true</prop>
+			    
+		    </props>
+<!--             <map> -->
+<!--                 <entry key="jadira.usertype.autoRegisterUserTypes" value="true"/> -->
+<!--             </map> -->
+        </property>
+		<property name="mappingResources" value="META-INF/orm.xml" />	
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="maxActive" value="50" />
+		<property name="maxIdle"  value="10" />
+		<property name="maxWait"  value="10000" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<!-- all methods starting with 'find' are read-only -->
+			<tx:method name="find*" read-only="true" />
+			<!-- other methods use the default transaction settings (see below) -->
+			<tx:method name="*" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>	
+	
+	<aop:config>
+		<aop:pointcut id="transactionalServiceOperation"
+			expression="execution(* com.multiple..*ServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="transactionalServiceOperation" />
+	</aop:config>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean name="auditorAwareBean" class="com.multiple.auditaware.AuditorBean" ></bean>
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="classpath:ehcache.xml" p:shared="true"/>
+		<cache:annotation-driven />
+		
+		
+<!-- 	<bean name="cacheManager" class="org.springframework.cache.support.SimpleCacheManager"> -->
+<!-- 		<property name="caches"> -->
+<!-- 			<set> -->
+<!-- 				<bean p:name="country" class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" /> -->
+<!-- 			</set> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+
+
+<!-- Ehcache library setup -->
+
+
+<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" >
+	<property name="cacheManager"><ref bean="ehcache"/></property>
+</bean>
+</beans>

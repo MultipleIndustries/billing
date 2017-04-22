@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+
+	
+<!-- 	<http  pattern="/auth"   entry-point-ref="restAuthenticationEntryPoint"> -->
+<!-- 	    <intercept-url pattern="/*" access="isAuthenticated()" /> -->
+<!--     	<form-login authentication-success-handler-ref="restSuccessHandler" -->
+<!--     	   authentication-failure-handler-ref="restAuthenticationFailureHandler"/> -->
+<!-- 		<logout logout-url="/j_spring_security_logout_rest"/> -->
+<!-- 	</http> -->
+	
+	<http  pattern="/customLogin"  entry-point-ref="customAuthenticationEntryPoint">
+	    <intercept-url pattern="/*" access="isAuthenticated()" />
+    	<form-login authentication-success-handler-ref="restSuccessHandler"
+    	   authentication-failure-handler-ref="restAuthenticationFailureHandler"/>
+		<logout logout-url="/j_spring_security_logout"/>
+		<csrf disabled="true"/>
+	</http>
+	
+	<http create-session="stateless" pattern="/auth" use-expressions="true"  entry-point-ref="restAuthenticationEntryPoint">
+	   <intercept-url pattern="/*" access="isAuthenticated()" />
+    	<form-login authentication-success-handler-ref="restSuccessHandler"
+    	  authentication-failure-handler-ref="restAuthenticationFailureHandler"/>
+		<logout logout-url="/j_spring_security_logout_rest"/> 
+		<csrf disabled="true"/>
+	</http>
+	
+<!-- 	<http create-session="stateless" pattern="/customLoginIOS" use-expressions="true"  entry-point-ref="customAuthenticationEntryPoint"> -->
+<!-- 	   <intercept-url pattern="/*" access="isAuthenticated()" /> -->
+<!--     	<form-login authentication-success-handler-ref="restSuccessHandler" -->
+<!--     	  authentication-failure-handler-ref="restAuthenticationFailureHandler"/> -->
+<!-- 		<logout />   -->
+<!-- 	</http> -->
+	
+	<http auto-config="true"  >
+		<access-denied-handler error-page="/AccessDenied"/>
+<!-- 		<intercept-url pattern="/GetOTP" -->
+<!-- 			access="permitAll" /> -->
+		<intercept-url pattern="/demoInput"
+			access="permitAll" />
+<!-- 			<intercept-url pattern="/biomFingerprint" -->
+<!-- 			access="permitAll" /> -->
+		<intercept-url pattern="/otpInput"
+			access="permitAll" />
+<!-- 		<intercept-url pattern="/validateOtp" -->
+<!-- 			access="permitAll" /> -->
+		<intercept-url pattern="/biomInput"
+			access="permitAll" />
+		<intercept-url pattern="/tfaInput"
+			access="permitAll" />
+<!-- 		<intercept-url pattern="/tfaService" -->
+<!-- 			access="permitAll" /> -->
+<!-- 		<intercept-url pattern="/rest/*" -->
+<!-- 			access="permitAll" /> -->
+		<intercept-url pattern="/OTPAction"
+			access="permitAll" />
+		<intercept-url pattern="/demoInput2"
+			access="permitAll" />
+	    <intercept-url pattern="/LoginPage"
+			access="permitAll" />
+		<intercept-url pattern="/ForgotLogin"
+			access="permitAll" />
+		<intercept-url pattern="/VerifyOtp"
+			access="permitAll" />
+		<intercept-url pattern="/LandingPage"
+			access="permitAll" />
+		<intercept-url pattern="/SubmitForgotLogin"
+			access="permitAll" />
+		<intercept-url pattern="/ForgotPassword"
+			access="permitAll" />
+		<intercept-url pattern="/ValidateCorporateCode"
+			access="permitAll" />
+		<intercept-url pattern="/Register/AddCorporateMemeber"
+			access="permitAll" />
+		<intercept-url pattern="/ValidateLogin"
+			access="permitAll" />
+		<intercept-url pattern="/LoginServlet"
+			access="permitAll" />
+		<intercept-url pattern="/Termsofuse"
+			access="permitAll" />
+		<intercept-url pattern="/Member/AddMember"
+			access="permitAll" />
+	   <intercept-url pattern="/Register" 
+	   		access="permitAll" />
+	    <intercept-url pattern="/SaveMember" 
+	    access="permitAll" />
+	     <!-- <intercept-url pattern="/PersonalDetails" 
+	    access="permitAll" />
+	     <intercept-url pattern="/SavePersonalDetails" 
+	    access="permitAll" />
+	     <intercept-url pattern="/LoanDetails" 
+	    access="permitAll" />
+	     <intercept-url pattern="/SaveLoanDetails" 
+	    access="permitAll" />
+	    <intercept-url pattern="/IncomeDetails" 
+	    access="permitAll" />
+	     <intercept-url pattern="/SaveIncomeDetails" 
+	    access="permitAll" />
+	    <intercept-url pattern="/Documents" 
+	    access="permitAll" />
+	     <intercept-url pattern="/SaveDocuments" 
+	    access="permitAll" /> -->
+		<intercept-url pattern="/SubmitForgotPassword"
+			access="permitAll" />
+		<intercept-url pattern="/ResetPassword"
+			access="permitAll" />
+		<intercept-url pattern="/MemberCaptcha"
+			access="permitAll" />
+		<intercept-url pattern="/SubmitResetPassword"
+			access="permitAll" />
+		<intercept-url pattern="/css/**"
+			access="permitAll" />
+		<intercept-url pattern="/images/**"
+			access="permitAll" />
+		<intercept-url pattern="/js/**"
+			access="permitAll" />
+		<intercept-url pattern="/Files/**"
+			access="permitAll" />
+		<intercept-url pattern="/resources/**"
+			access="permitAll" />	
+		<intercept-url pattern="/resources/*/*/*/*"
+			access="permitAll" />
+			
+		<intercept-url pattern="/**"
+			access="isAuthenticated()" />
+
+		<form-login login-page="/LoginPage"
+			authentication-failure-url="/LoginPage?login_error=1"							
+			default-target-url="/Index" 
+			always-use-default-target="true"
+			authentication-details-source-ref="myWebAuthSource"/>
+		<logout logout-success-url="/" invalidate-session="true" delete-cookies="JSESSIONID" logout-url="/j_spring_security_logout" />
+		
+		<session-management invalid-session-url="/LoginPage">
+        </session-management>
+        <csrf disabled="true"/>
+	</http>
+
+	<authentication-manager alias="authManager">
+		<authentication-provider user-service-ref="customUserDetailServiceImpl" >
+<!--   			<password-encoder ref="encoder"></password-encoder> -->
+		</authentication-provider>
+	</authentication-manager>
+	
+	
+	<beans:bean id="encoder" 
+	    class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+	</beans:bean>
+	
+	<beans:bean id="myWebAuthSource" class="com.multiple.root.config.MyWebAuthenticationSource"></beans:bean>
+  
+	<beans:bean id="customUserDetailServiceImpl" class="com.multiple.common.service.impl.CustomUserDetailsServiceImpl">
+	    <beans:property name="user" ref="userBean"/>
+	</beans:bean>
+	
+	<beans:bean id="userBean" class="com.multiple.common.model.User">
+	    <beans:property name="userId" value="10"/>
+	</beans:bean>
+</beans:beans>

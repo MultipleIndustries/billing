@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use this definition if using a Java EE 6 container This also stops Eclipse 
+	from complaining that 3.0 is not a valid version <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" 
+	http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"> -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" 
+xmlns:web="http://java.sun.com/xml/ns/javaee" 
+xmlns="http://java.sun.com/xml/ns/javaee" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+version="2.5">
+
+<!-- 	Filter start -->
+<!-- 	Custom filter to get UTF-8 working on java webapps -->
+	  <filter>
+		    <display-name>CharsetFilter</display-name>
+		    <filter-name>CharsetFilter</filter-name>
+		    <filter-class>com.multiple.root.util.CharsetFilter</filter-class>
+			 <init-param>
+		            <param-name>requestEncoding</param-name>
+		            <param-value>UTF-8</param-value>
+		        </init-param>
+	  </filter>
+	  
+	  <filter-mapping>
+	    <filter-name>CharsetFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping>
+<!--  Its goal is "delegating to a Spring-managed bean that implements the Filter interface",
+	  that is, it finds a bean ("target bean" or "delegate") in your Spring application context and invokes it. -->
+	  <filter>
+		    <filter-name>springSecurityFilterChain</filter-name>
+		    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	  </filter>
+	  
+	  <filter-mapping>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <url-pattern>/*</url-pattern>
+	  </filter-mapping>
+	  
+<!-- 	Filter end -->	  
+	  
+	  
+<!--  Context start	   --> 
+  
+<!--  In Spring MVC, there are two context. One is the application context or global context
+ 	  which is booted up by ContextLoaderListener. It takes all the configuration file mentioned 
+ 	  in contextConfigLocation parameter.  -->
+<!--  Now if you are are using Spring MVC also than Dispatcher servlet is required, which boots up 
+	  another container which is also known as web application container. This container takes the 
+	  global container as a parent.  -->
+<!--  If you are using Spring in the backend only, then the global context is good enough. However 
+ 	  if you are using Spring MVC also for front end than you need Dispatcher Servlet also. -->
+	  <listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	  </listener>
+	  
+	  <context-param>
+    		<param-name>defaultHtmlEscape</param-name>
+    		<param-value>true</param-value>
+	  </context-param>
+	  <context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>
+				/WEB-INF/spring/root-context.xml
+				/WEB-INF/root-servlet.xml
+				/WEB-INF/spring-security.xml
+			</param-value>
+	  </context-param>
+	  
+	  <servlet>
+	    <servlet-name>root</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>root</servlet-name>
+	    <url-pattern>/</url-pattern>
+	  </servlet-mapping>
+	  
+<!--  Context end	   --> 	  
+	  
+<!--  The welcome-file-list element of web-app, is used to define a list of welcome files. 
+	  Its sub element is welcome-file that is used to define the welcome file. -->
+	  <welcome-file-list>
+	    <welcome-file>/</welcome-file>
+	  </welcome-file-list>
+	  
+<!--  The jsp-config element is used to provide global configuration information for the JSP files in a Web application. -->
+	  <jsp-config>
+	    <jsp-property-group>
+	      <url-pattern>*.jsp</url-pattern>
+	      <page-encoding>UTF-8</page-encoding>
+	    </jsp-property-group>
+	  </jsp-config>
+	  
+	  
+	  
+	  
+	  <error-page>
+	    <error-code>400</error-code>
+	    <location>/Error400</location>
+	  </error-page>
+	  <error-page>
+	    <error-code>401</error-code>
+	    <location>/Error401</location>
+	  </error-page>
+	  <error-page>
+	    <error-code>403</error-code>
+	    <location>/Error403</location>
+	  </error-page>
+	  <error-page>
+	    <error-code>404</error-code>
+	    <location>/Error404</location>
+	  </error-page>
+	  <error-page>
+	    <error-code>500</error-code>
+	    <location>/Error500</location>
+	  </error-page>
+	  
+	  <error-page>
+	    <error-code>503</error-code>
+	    <location>/Error503</location>
+	  </error-page>
+
+</web-app>

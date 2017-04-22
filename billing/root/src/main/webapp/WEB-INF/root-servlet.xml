@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Scans within the base package of the application for @Components to configure as beans -->
+	<context:component-scan base-package="com.multiple.*.controller" />
+	<context:component-scan base-package="com.multiple.*.service.impl" />
+	<context:component-scan base-package="com.multiple.root.config" />
+	<context:component-scan base-package="com.multiple.common.util" />
+	<context:component-scan base-package="com.multiple.common.concurrency" />
+		
+	<util:properties id="portalProperties" location="classpath:portal.properties"></util:properties>
+	<util:properties id="esignProperties" location="classpath:esign.properties"></util:properties>
+	<tx:annotation-driven />
+
+	<!-- Creating thread pool for asyn mail sending -->
+	<task:executor id="asyncExecutor" pool-size="25"/>
+	<task:annotation-driven executor="asyncExecutor" /> 
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven  conversion-service="applicationConversionService" />	
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	
+	<beans:bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	  <beans:property name="viewResolvers">
+	    <beans:list>
+	      <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<beans:property name="prefix" value="/WEB-INF/views/" />
+			<beans:property name="suffix" value=".jsp" />
+		</beans:bean>
+	    </beans:list>
+	  </beans:property>
+	  <beans:property name="defaultViews">
+	    <beans:list>
+	      <beans:bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+	        <beans:property name="prefixJson" value="true"/>
+	      </beans:bean>
+	    </beans:list>
+	  </beans:property>
+	</beans:bean>
+	
+<beans:bean id="multipartResolver"
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/style.css" location="/style.css" />
+	<mvc:resources mapping="/**" location="/" />
+	
+	<beans:bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	
+	<beans:bean id="applicationConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <beans:property name="converters">
+	    <beans:list>
+	        <beans:bean class="com.multiple.root.util.StringTrimmingConverter"/>
+	    </beans:list>
+	    </beans:property>
+	</beans:bean>
+	
+	<beans:bean id="passValidator" class="com.multiple.root.util.PasswordValidator">
+	</beans:bean>
+	
+<!-- 	<beans:bean id="uidProperties" class="com.tin.common.util.UIDProperties"> -->
+<!-- 	   <constructor-arg type="java.lang.String" value="C:\\Users\\Priyanka Pipada\\workspace\\aua\\root\\src\\main\\resources\\bfd.properties"></constructor-arg> -->
+<!-- 	</beans:bean> -->
+	
+	
+<!-- 	<beans:bean id="baseCurrency" class="com.multiple.common.model.CurrencyMaster"> -->
+<!-- 	    <beans:property name="currencyId" value="1"/> -->
+<!-- 	    <beans:property name="currencyName" value="Dollar"/> -->
+<!-- 	    <beans:property name="currencySign" value="$"/> -->
+<!-- 	</beans:bean> -->
+
+	<mvc:interceptors>
+        <beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+             <beans:property name="cacheSeconds" value="0"/>
+             <beans:property name="useExpiresHeader" value="false"/>
+             <beans:property name="useCacheControlHeader" value="true"/>
+             <beans:property name="useCacheControlNoStore" value="true"/>
+         </beans:bean>     
+    </mvc:interceptors>
+    
+    <!-- Please do not comment below bean -->
+    <beans:bean id="applicationContextProvder"
+                       class="com.multiple.common.util.ApplicationContextProvider"/>
+</beans:beans>
